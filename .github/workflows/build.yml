@@ -15,5 +15,8 @@ jobs:
       with:
         distribution: corretto
         java-version: 11
-#        cache: sbt
+        cache: sbt
 
+    - name: Build
+      run: |
+        sbt compile
