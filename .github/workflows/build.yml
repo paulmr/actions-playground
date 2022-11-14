@@ -1,0 +1,3 @@
+name: Build and upload artifact on push to any branch
+on: [push, workflow_dispatch]
+
