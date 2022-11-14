@@ -6,8 +6,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout repo
       uses: actions/checkout@v3
+
     - name: Set-up java/scala
       uses: actions/setup-java@v3
+      with:
+        distribution: corretto
+        java-version: 11
+#        cache: sbt
 
