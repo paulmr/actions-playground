@@ -1,3 +1,13 @@
 name: Build and upload artifact on push to any branch
-on: [push, workflow_dispatch]
+on:
+  - push
+  - workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Set-up java/scala
+      uses: actions/setup-java@v3
 
