@@ -7,16 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - uses: coursier/cache-action@v6
+    - uses: VirtusLab/scala-cli-setup@main
+
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Set-up java/scala
-      uses: actions/setup-java@v3
-      with:
-        distribution: corretto
-        java-version: 11
-        cache: sbt
-
     - name: Build
       run: |
-        sbt package
+        scala-cli compile src
