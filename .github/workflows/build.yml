@@ -1,4 +1,4 @@
-name: Build and upload artifact on push to any branch
+name: Build on push to any branch
 on:
   - push
   - workflow_dispatch
@@ -19,4 +19,4 @@ jobs:
 
     - name: Build
       run: |
-        sbt compile
+        sbt package
