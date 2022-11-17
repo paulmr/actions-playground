@@ -6,7 +6,11 @@ object Example {
         new java.io.FileOutputStream(fname, true))
     }
 
+    val secret = Option(System.getenv("GHA_TEST_SECRET")).getOrElse("?missing?")
+
     summary.println("## Hello World")
+
+    summary.println(s"Secret from env: $secret")
 
     summary.close()
   }
