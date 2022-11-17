@@ -11,8 +11,7 @@ case class RequestStat(bodyLength: Long, valid: Boolean, duration: Duration) {
         """<img src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20"/>"""
       else
         """<img src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20"/>"""
-    // f"Body length: ${bodyLength}%10d; valid: ${validStr}%5s; duration: ${duration.toMillis}ms"
-    f"|${bodyLength}%10d|${validStr}%5s|${duration.toMillis}ms|"
+    s"| $bodyLength | $validStr | ${duration.toMillis}ms |"
   }
 }
 
@@ -82,7 +81,7 @@ object ContentApiBodyLength {
     summary.println("## Test result")
     summary.println(s"Valid: $validCount of $max")
 
-    summary.println("\n|Body len|Valid|Duration|")
+    summary.println("\n| Body len | Valid | Duration |")
     for(stat <- stats) summary.println(stat.tableLine)
 
     summary.close()
