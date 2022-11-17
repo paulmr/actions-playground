@@ -41,7 +41,7 @@ object ContentApiBodyLength {
       headers = requests.BaseSession.defaultHeaders - "Accept-Encoding" // disable gzip compression
     )
 
-    val max = 2
+    val max = 20
     val delay = 20.millis
 
     println(s"Running $max requests")
