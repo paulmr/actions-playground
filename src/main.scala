@@ -11,7 +11,7 @@ case class RequestStat(bodyLength: Long, valid: Boolean, duration: Duration) {
         """<img src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20"/>"""
       else
         """<img src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20"/>"""
-    s"<tr><td>$bodyLength</td><td>$validStr</td><td>${duration.toMillis}</td></tr>"
+    s"<tr><td>$bodyLength</td><td>$validStr</td><td>${duration.toMillis} ms</td></tr>"
   }
 }
 
