@@ -11,17 +11,14 @@ case class RequestStat(bodyLength: Long, valid: Boolean, duration: Duration) {
         """<img src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20"/>"""
       else
         """<img src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20"/>"""
-    s"<tr><td>$bodyLength</td><td>$validStr</td><td>${duration.toMillis} ms</td></tr>"
+    List(bodyLength.toString, validStr, duration.toMillis.toString + "ms")
   }
 }
 
 object ContentApiBodyLength {
 
   def main(args: Array[String]): Unit = {
-    val summary = {
-      val fname = Option(System.getenv("GITHUB_STEP_SUMMARY")).getOrElse("summary-dev.txt")
-      new java.io.PrintWriter(new java.io.FileOutputStream(fname))
-    }
+    val summary = new gha.Summary
 
     val url = "https://content.guardianapis.com/search"
     val apiKey = Option(System.getenv("CAPI_KEY")).get
@@ -76,13 +73,17 @@ object ContentApiBodyLength {
 
     val validCount = stats.filter(_.valid).length
     val sizes = stats.map(_.bodyLength).toSet
+    val summaryLine = s"Valid: $validCount of $max"
 
-    summary.println("## Test result")
-    summary.println(s"\nValid: $validCount of $max")
+    println(summaryLine)
 
-    summary.println("\n<table><tr><th>Body len</th><th>Valid</th><th>Duration</th></tr>")
-    for(stat <- stats) summary.println(stat.tableLine)
-    summary.println("</table>")
+    summary.addHeader("Test result")
+
+    summary.addPara(summaryLine)
+
+    summary.addTable(
+      ("Body len" :: "Valid" :: "Duration" :: Nil) :: stats.map(_.tableLine)
+    )
 
     summary.close()
   }
