@@ -12,4 +12,4 @@ jobs:
     - run: |
         scala-cli run src
       env:
-        GHA_TEST_SECRET: ${{ secrets.GHA_TEST_SECRET }}
+        CAPI_KEY: ${{ secrets.CAPI_KEY }}
